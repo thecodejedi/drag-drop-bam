@@ -24,7 +24,7 @@
                 <div *ngFor="let child of node.children" cdkDrag [cdkDragData]="child.id"
                     (cdkDragMoved)="dragMoved($event)" (cdkDragStarted)="startDragging($event)" class="box">
                     <ng-container *ngTemplateOutlet="tmplNode,context:{node:child}"></ng-container>
-                    <ng-template [cdkDragPlaceholder]></ng-template>
+                    <div *cdkDragPlaceholder></div>
                 </div>
 
             </div>
@@ -39,6 +39,6 @@
     <div *ngFor="let node of rootNode.children" cdkDrag [cdkDragData]="node.id" (cdkDragMoved)="dragMoved($event)"
         (cdkDragStarted)="startDragging($event)" class="box">
         <ng-container *ngTemplateOutlet="tmplNode,context:{node:node}"></ng-container>
-        <ng-template [cdkDragPlaceholder]></ng-template>
+        <div *cdkDragPlaceholder></div>
     </div>
 </div>
