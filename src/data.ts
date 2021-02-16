@@ -73,6 +73,13 @@ export var operators: TreeNode[] = [
     isSelected: false,
     isHighlighted: false
   }),
+  new TreeNodeCls({
+    text: 'BLOX',
+    allowChildren: true,
+    children: [],
+    isSelected: false,
+    isHighlighted: false
+  }),
 ]
 
 
