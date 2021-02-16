@@ -1,0 +1,79 @@
+.cdk-drag-placeholder {
+    /* opacity: 0; */
+}
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+    background: #fff;
+    opacity: 0.3;
+}
+
+.node-container {
+    &.selected {
+        border: 2px red solid;
+    }
+    &.highlighted {
+        border: 2px gray solid;
+    }
+    &.expanded {
+        border: 1px dashed green;
+        &.selected {
+            border: 2px red dashed;
+        }
+    }
+}
+
+.node-title {
+    padding: 15px;
+    margin: 5px;
+    background: #eee;
+    cursor: pointer;
+}
+
+.node-children {
+    position: relative;
+    transition: height 0.2s;
+    margin-left: 40px;
+}
+.item-notes {
+    margin-left: 20px;
+    color: #aaa;
+}
+
+.droplist-container {
+    min-width: 100%;
+    min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 4px;
+    vertical-align: bottom;
+}
+
+.box {
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background: white;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.drop-inside {
+    border: 2px solid #00f !important;
+}
+
+.drop-before {
+    border-left: 2px solid #00f !important;
+}
+
+.drop-after {
+    border-right: 2px solid #00f !important;
+}

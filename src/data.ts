@@ -11,14 +11,18 @@ export class TreeNodeCls implements TreeNode {
     this.isExpanded = node.isExpanded;
     this.allowChildren = node.allowChildren;
     this.isSelected = node.isSelected;
+    this.isHighlighted = node.isHighlighted;
+    this.readOnly = node.readOnly;
   }
+  isHighlighted: boolean;
 
-  id: string;
-  text: string;
-  children: TreeNode[];
-  isExpanded?: boolean;
-  allowChildren: boolean;
-  isSelected: boolean;
+  id: string
+  text: string
+  children: TreeNode[]
+  isExpanded?: boolean
+  allowChildren: boolean
+  isSelected: boolean
+  readOnly?: boolean
 }
 
 export interface TreeNodeData {
@@ -27,6 +31,8 @@ export interface TreeNodeData {
   isExpanded?: boolean;
   allowChildren: boolean;
   isSelected: boolean;
+  isHighlighted: boolean;
+  readOnly?: boolean;
 }
 
 export interface TreeNode extends TreeNodeData {
@@ -40,99 +46,113 @@ export interface DropInfo {
 
 export var operators: TreeNode[] = [
   new TreeNodeCls({
-    text: "+",
+    text: '+',
     allowChildren: false,
     children: [],
-    isSelected: false
+    isSelected: false,
+    isHighlighted: false
   }),
   new TreeNodeCls({
-    text: "-",
+    text: '-',
     allowChildren: false,
     children: [],
-    isSelected: false
+    isSelected: false,
+    isHighlighted: false
   }),
   new TreeNodeCls({
-    text: "*",
+    text: '*',
     allowChildren: false,
     children: [],
-    isSelected: false
+    isSelected: false,
+    isHighlighted: false
   }),
   new TreeNodeCls({
-    text: "/",
+    text: '/',
     allowChildren: false,
     children: [],
-    isSelected: false
-  })
-];
+    isSelected: false,
+    isHighlighted: false
+  }),
+]
 
 export var demoData: TreeNode[] = [
   new TreeNodeCls({
-    text: "14",
+    text: '14',
     allowChildren: false,
     children: [],
-    isSelected: false
+    isSelected: false,
+    isHighlighted: false
   }),
   new TreeNodeCls({
-    text: "X",
+    text: 'X',
     allowChildren: false,
     children: [],
-    isSelected: false
+    isSelected: false,
+    isHighlighted: false
   }),
   new TreeNodeCls({
-    text: "SUMME",
+    text: 'SUMME',
     allowChildren: true,
     isSelected: false,
     isExpanded: true,
+    isHighlighted: false,
     children: [
       new TreeNodeCls({
-        text: "BLOX",
+        text: 'BLOX',
         allowChildren: true,
         children: [
           new TreeNodeCls({
-            text: "Datenpunkt A1",
+            text: 'Datenpunkt A1',
             allowChildren: false,
             children: [],
-            isSelected: false
+            isSelected: false,
+            isHighlighted: false
           }),
           new TreeNodeCls({
-            text: "Datenpunkt A2",
+            text: 'Datenpunkt A2',
             allowChildren: false,
             children: [],
-            isSelected: false
+            isSelected: false,
+            isHighlighted: false
           }),
           new TreeNodeCls({
-            text: "Datenpunkt A3",
+            text: 'Datenpunkt A3',
             allowChildren: false,
             children: [],
-            isSelected: false
-          })
-        ],
-        isSelected: false
+            isSelected: false,
+            isHighlighted: false
+          })],
+        isSelected: false,
+        isHighlighted: false
       }),
       new TreeNodeCls({
-        text: "Datenpunkt A2",
+        text: 'Datenpunkt A2',
         allowChildren: false,
         children: [],
-        isSelected: false
+        isSelected: false,
+        isHighlighted: false
       }),
       new TreeNodeCls({
-        text: "Datenpunkt A3",
+        text: 'Datenpunkt A3',
         allowChildren: false,
         children: [],
-        isSelected: false
+        isSelected: false,
+        isHighlighted: false
       })
     ]
   }),
   new TreeNodeCls({
-    text: "/",
+    text: '/',
     allowChildren: false,
     children: [],
-    isSelected: false
+    isSelected: false,
+    isHighlighted: false
   }),
   new TreeNodeCls({
-    text: "CO2",
+    text: 'CO2',
     allowChildren: false,
     children: [],
-    isSelected: false
+    isSelected: false,
+    isHighlighted: false
   })
-];
+]
