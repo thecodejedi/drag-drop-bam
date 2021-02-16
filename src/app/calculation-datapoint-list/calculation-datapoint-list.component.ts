@@ -1,6 +1,6 @@
 import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { TreeNode, TreeNodeCls } from 'src/data';
+import { TreeNode, TreeNodeCls } from '../../data';
 import { NodeService } from '../node.service';
 
 @Component({
