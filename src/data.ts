@@ -75,6 +75,38 @@ export var operators: TreeNode[] = [
   }),
 ]
 
+
+export var dataPoints: TreeNode[] = [
+  new TreeNodeCls({
+    text: 'Datenpunkt A1',
+    allowChildren: false,
+    children: [],
+    isSelected: false,
+    isHighlighted: false
+  }),
+  new TreeNodeCls({
+    text: 'Datenpunkt A2',
+    allowChildren: false,
+    children: [],
+    isSelected: false,
+    isHighlighted: false
+  }),
+  new TreeNodeCls({
+    text: 'Datenpunkt A3',
+    allowChildren: false,
+    children: [],
+    isSelected: false,
+    isHighlighted: false
+  }),
+  new TreeNodeCls({
+    text: 'Datenpunkt A4',
+    allowChildren: false,
+    children: [],
+    isSelected: false,
+    isHighlighted: false
+  }),
+]
+
 export var demoData: TreeNode[] = [
   new TreeNodeCls({
     text: '14',

@@ -74,6 +74,11 @@ export class CalculationStripComponent implements OnInit {
     });
   }
 
+  private removeNode(node: TreeNode) {
+    this.nodeService.removeNode(node);
+    this.nodeRemoved.emit(node);
+  }
+
   getOrigin(nodeId: string) {
     return { elementRef: document.getElementById(nodeId) };
   }

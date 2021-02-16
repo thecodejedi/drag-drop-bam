@@ -44,12 +44,4 @@ export class CalculationOperatorsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  startDragging(event) {
-
-  }
-
-  drop(event) {
-
-  }
-
 }

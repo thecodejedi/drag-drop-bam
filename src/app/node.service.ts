@@ -36,6 +36,12 @@ export class NodeService {
     this.prepareDragDrops(node.children);
   }
 
+  removeNode(node: TreeNode) {
+    let parentNode = this.getParent(node.id);
+    let i = parentNode.children.findIndex(c => c === node);
+    parentNode.children.splice(i, 1);
+  }
+
   @debounce(50)
   dragMoved(event: CdkDragMove<string>) {
     let mainContainer = this.document.getElementById(this.rootNodes.find(item => item.text == "main").id);
@@ -44,8 +50,6 @@ export class NodeService {
     console.log(y);
 
     let e = this.document.elementFromPoint(event.pointerPosition.x, y);
-
-
 
     if (!e) {
       this.clearDragInfo();
@@ -108,29 +112,33 @@ export class NodeService {
     }
   }
 
+  private getParent(targetId: string): TreeNode {
+    let targetListId;
+    for (const parent in this.rootNodes) {
+      var node = this.rootNodes[parent];
+      targetListId = this.getParentNodeId(targetId, [node], node);
+      if (targetListId) {
+        break;
+      }
+    }
+    return targetListId;
+  }
+
   drop(event: CdkDragDrop<string>) {
     if (!this.dropActionTodo) return;
 
     const draggedItemId: string = event.item.data;
     const parentItemId = event.previousContainer.id;
-    let targetListId;
-    for (const parent in this.rootNodes) {
-      var node = this.rootNodes[parent];
-      targetListId = this.getParentNodeId(this.dropActionTodo.targetId, [node], node.id);
-      if (targetListId) {
-        break;
-      }
-    }
+    const targetItem = this.getParent(this.dropActionTodo.targetId);
 
     console.log(
       '\nmoving\n[' + draggedItemId + '] from list [' + parentItemId + ']',
-      '\n[' + this.dropActionTodo.action + ']\n[' + this.dropActionTodo.targetId + '] from list [' + targetListId + ']');
+      '\n[' + this.dropActionTodo.action + ']\n[' + this.dropActionTodo.targetId + '] from list [' + targetItem.id + ']');
 
     let draggedItem = this.nodeLookup[draggedItemId];
 
     const parentItem = this.nodeLookup[parentItemId];
     const oldItemContainer = parentItem.children;
-    const targetItem = this.nodeLookup[targetListId];
     const newContainer = targetItem.children;
 
     console.log(parentItem);
@@ -169,10 +177,10 @@ export class NodeService {
     this.clearDragInfo(true)
   }
 
-  getParentNodeId(id: string, nodesToSearch: TreeNode[], parentId: string): string {
+  getParentNodeId(id: string, nodesToSearch: TreeNode[], parentNode: TreeNode): TreeNode {
     for (let node of nodesToSearch) {
-      if (node.id == id) return parentId;
-      let ret = this.getParentNodeId(id, node.children, node.id);
+      if (node.id == id) return parentNode;
+      let ret = this.getParentNodeId(id, node.children, node);
       if (ret) return ret;
     }
     return null;

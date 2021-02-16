@@ -1,8 +1,8 @@
 <div cdkDropList [id]="operatorRoot.id" class="row" [cdkDropListData]="operatorRoot.children"
     (cdkDropListDropped)="nodeService.drop($event)" class="operator-list" [cdkDropListSortingDisabled]="true">
     <div class="operator-block" *ngFor="let operator of operatorRoot.children" cdkDrag
-        (cdkDragMoved)="nodeService.dragMoved($event)" (cdkDragStarted)="startDragging($event)"
-        [cdkDragData]="operator.id" [attr.data-id]="operator.id" [attr.id]="'node-'+operator.id">
+        (cdkDragMoved)="nodeService.dragMoved($event)" [cdkDragData]="operator.id" [attr.data-id]="operator.id"
+        [attr.id]="'node-'+operator.id">
         <div class="operator-title">
             {{operator.text}}</div>
     </div>

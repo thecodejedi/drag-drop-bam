@@ -1,2 +1,9 @@
-<app-calculation-operators [operators]="operators"></app-calculation-operators>
-<app-calculation-strip (selectedNodeChanged)="nodeSelected($event)"></app-calculation-strip>
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened class="inner">
+        <app-calculation-datapoint-list [datapoints]="datapoints"></app-calculation-datapoint-list>
+    </mat-drawer>
+    <app-calculation-operators [operators]="operators"></app-calculation-operators>
+    <div class="calculations">
+        <app-calculation-strip (selectedNodeChanged)="nodeSelected($event)"></app-calculation-strip>
+    </div>
+</mat-drawer-container>

@@ -1,0 +1,9 @@
+<div cdkDropList [id]="datapointRoot.id" class="row" [cdkDropListData]="datapointRoot.children"
+    (cdkDropListDropped)="drop($event)" class="datapoint-list" [cdkDropListSortingDisabled]="true">
+    <div class="datapoint-block" *ngFor="let datapoint of datapointRoot.children" cdkDrag
+        (cdkDragMoved)="dragMoved($event)" [cdkDragData]="datapoint.id" [attr.data-id]="datapoint.id"
+        [attr.id]="'node-'+datapoint.id">
+        <div class="datapoint-title">
+            {{datapoint.text}}</div>
+    </div>
+</div>
