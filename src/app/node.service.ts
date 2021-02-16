@@ -1,17 +1,16 @@
 import { debounce } from '@agentepsilon/decko';
 import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
-import { EventEmitter } from 'events';
-import { DropInfo, TreeNode, TreeNodeCls } from 'src/data';
+import { EventEmitter, Inject, Injectable } from '@angular/core';
+import { DropInfo, TreeNode, TreeNodeCls } from '../data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NodeService {
 
-  dragInfoClearedEvent: EventEmitter = new EventEmitter();
-  droppedEvent: EventEmitter = new EventEmitter();
+  dragInfoClearedEvent: EventEmitter<void> = new EventEmitter();
+  droppedEvent: EventEmitter<void> = new EventEmitter();
 
   // ids for connected drop lists
   dropTargetIds: string[] = [];
