@@ -1,7 +1,3 @@
-.cdk-drag-placeholder {
-    /* opacity: 0; */
-}
-
 .cdk-drag-preview {
     box-sizing: border-box;
     box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -12,25 +8,86 @@
 }
 
 .node-container {
+    position: relative;
     &.selected {
-        border: 2px red solid;
+        > .node {
+            border: 2px red solid;
+        }
     }
     &.highlighted {
         border: 2px gray solid;
     }
     &.expanded {
-        border: 1px dashed green;
+        > .node {
+            border: 1px dashed green;
+        }
         &.selected {
-            border: 2px red dashed;
+            > .node {
+                border: 2px red dashed;
+            }
         }
     }
 }
 
-.node-title {
-    padding: 15px;
-    margin: 5px;
-    background: #eee;
-    cursor: pointer;
+.node-item {
+    > .node {
+        height: 60px;
+        min-width: 80px;
+        margin-right: 15px;
+        margin-left: 15px;
+        padding-right: 30px;
+        background: #eee;
+        * .remove-icon {
+            color: red;
+            position: absolute;
+            right: 20px;
+            top: 6px;
+        }
+        > .node-title {
+            padding: 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    }
+}
+
+.node-blox {
+    &.expanded {
+        margin-top: 5px;
+        margin-left: 15px;
+        margin-right: 15px;
+        > .node {
+            min-width: 80px;
+
+            * .remove-icon {
+                color: red;
+                position: absolute;
+                right: 20px;
+                top: 6px;
+            }
+            > .node-title {
+                background: #eee;
+                padding-bottom: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+    &.collapsed {
+        > .node {
+            height: 60px;
+            min-width: 80px;
+            margin-right: 15px;
+            margin-left: 15px;
+            padding-right: 30px;
+            background: #eee;
+            * .remove-icon {
+                color: red;
+                position: absolute;
+                right: 20px;
+                top: 6px;
+            }
+        }
+    }
 }
 
 .node-children {

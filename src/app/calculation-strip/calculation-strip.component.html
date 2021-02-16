@@ -14,15 +14,18 @@
 
     <div click-stop-propagation class="node-container" [attr.data-id]="node.id" [attr.id]="'node-'+node.id"
         (click)="selectNode(node)" (dblclick)="highlightNode(node)" cdkOverlayOrigin
-        [ngClass]="{'expanded' : node.isExpanded, 'node-blox': node.allowChildren, 'node-item':!node.allowChildren, 'selected':node.isSelected, 'highlighted':node.isHighlighted}">
+        [ngClass]="{'expanded' : node.isExpanded, 'collapsed' : !node.isExpanded, 'node-blox': node.allowChildren, 'node-item':!node.allowChildren, 'selected':node.isSelected, 'highlighted':node.isHighlighted}">
 
         <div class="node">
             <div class="node-title">
-                <span (click)="toggleNode(node)">{{node.children.length ?
-                    (node.isExpanded?'-&nbsp;':'+'):''}}</span>
-                {{node.text}}
-                <span class="item-notes"> ({{node.children.length}}{{node.children.length?', expanded: ' +
-                    !!node.isExpanded:''}})</span>
+                <span (click)="toggleNode(node)" *ngIf="node.allowChildren">
+                    <mat-icon inline=true *ngIf="node.isExpanded">expand_more</mat-icon>
+                    <mat-icon inline=true *ngIf="!node.isExpanded">expand_less</mat-icon>
+                </span>
+                <span>{{node.text}}</span>
+                <div (click)="removeNode(node)" class="remove-icon">
+                    <mat-icon inline=true>delete</mat-icon>
+                </div>
 
             </div>
             <div *ngIf="node.isExpanded && node.children.length" class="node-children" cdkDropList

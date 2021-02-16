@@ -17,6 +17,9 @@ export class CalculationStripComponent implements OnInit {
   @Output()
   selectedNodeChanged: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
 
+  @Output()
+  nodeRemoved: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
+
   rootNode: TreeNode = new TreeNodeCls({
     allowChildren: true,
     children: demoData,
