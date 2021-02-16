@@ -2,9 +2,18 @@
   Template needs to be in the select container!
   https://github.com/angular/angular/issues/14842 
 -->
+
+
 <ng-template #tmplNode let-node="node">
+    <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="getOrigin('node-'+node.id)"
+        [cdkConnectedOverlayOpen]="node.isHighlighted">
+        <div class="example-list">
+            {{node.text}}
+        </div>
+    </ng-template>
+
     <div click-stop-propagation class="node-container" [attr.data-id]="node.id" [attr.id]="'node-'+node.id"
-        (click)="selectNode(node)" (dblclick)="highlightNode(node)"
+        (click)="selectNode(node)" (dblclick)="highlightNode(node)" cdkOverlayOrigin
         [ngClass]="{'expanded' : node.isExpanded, 'node-blox': node.allowChildren, 'node-item':!node.allowChildren, 'selected':node.isSelected, 'highlighted':node.isHighlighted}">
 
         <div class="node">

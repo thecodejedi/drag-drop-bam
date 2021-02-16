@@ -8,4 +8,9 @@ export class ClickStopPropagationDirective {
   public onClick(event: any): void {
     event.stopPropagation();
   }
+
+  @HostListener("dblclick", ["$event"])
+  public onDblClick(event: any): void {
+    event.stopPropagation();
+  }
 }

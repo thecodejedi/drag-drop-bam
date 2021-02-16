@@ -1,5 +1,6 @@
 import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { demoData, TreeNode, TreeNodeCls } from '../../data';
 import { NodeService } from '../node.service';
 
@@ -25,7 +26,7 @@ export class CalculationStripComponent implements OnInit {
     isHighlighted: false
   })
 
-  constructor(private nodeService: NodeService, private _elemRef: ElementRef) {
+  constructor(private nodeService: NodeService, private _elemRef: ElementRef, @Inject(DOCUMENT) private document: Document) {
     this.nodeService.registerRoot(this.rootNode);
   }
 
@@ -70,4 +71,7 @@ export class CalculationStripComponent implements OnInit {
     });
   }
 
+  getOrigin(nodeId: string) {
+    return { elementRef: document.getElementById(nodeId) };
+  }
 }
