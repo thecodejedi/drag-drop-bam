@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { operators, TreeNode } from 'src/data';
+import { operators, TreeNode } from '../../data';
 
 @Component({
   selector: 'app-calculation-main-display',

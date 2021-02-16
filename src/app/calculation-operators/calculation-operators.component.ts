@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { TreeNode, TreeNodeCls } from 'src/data';
+import { TreeNode, TreeNodeCls } from '../../data';
 import { NodeService } from '../node.service';
 
 @Component({
