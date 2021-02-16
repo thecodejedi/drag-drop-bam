@@ -126,7 +126,9 @@
 }
 
 .drop-inside {
-    border: 2px solid #00f !important;
+    > .node {
+        border: 2px solid #00f !important;
+    }
 }
 
 .drop-before {
