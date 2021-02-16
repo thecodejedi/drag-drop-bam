@@ -1,0 +1,100 @@
+<ng-template #tmplHandle>
+	<div class="example-handle">
+		<svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+			<path
+				d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+			</path>
+			<path d="M0 0h24v24H0z" fill="none"></path>
+		</svg>
+	</div>
+</ng-template>
+
+<button (click)="startBlock()" *ngIf="!blockMode">Block Mode</button>
+<button (click)="stopBlock()" *ngIf="blockMode">Select Mode</button>
+
+<ul>
+	<li *ngFor="let operator of operators">{{operator.text}}</li>
+</ul>
+<h1>Operators</h1>
+<div cdkDropList [id]="'operatorList'" class="row" [cdkDropListData]="operators" (cdkDropListDropped)="drop($event)"
+	class="operator-list" [cdkDropListConnectedTo]="dropTargetIds" [cdkDropListSortingDisabled]="true">
+	<div class="operator-block col-md-1" *ngFor="let operator of operators" cdkDrag (cdkDragMoved)="dragMoved($event)"
+		(cdkDragStarted)="startDragging($event)" [cdkDragData]="operator.id" class="node-item"
+		[attr.data-id]="operator.id" [attr.id]="'node-'+operator.id">
+		<div class="node-title">
+			{{operator.text}}</div>
+	</div>
+</div>
+
+<h1>Calc</h1>
+
+<dts-select-container [disableRangeSelection]="disableSelection" [disableDrag]="disableSelection"
+	[disabled]="disableSelection" #container="dts-select-container" (select)="selectedCalc($event)"
+	(itemSelected)="itemSelected($event)" (itemDeselected)="itemDeselected($event)"
+	(selectionEnded)="selectionEnded($event)" class="select-container dts-custom" [(selectedItems)]="selectedDocuments">
+
+	<!--  
+    Template needs to be in the select container!
+    https://github.com/angular/angular/issues/14842 
+  -->
+	<ng-template #tmplNode let-node="node">
+		<div class="node-item" [attr.data-id]="node.id" [attr.id]="'node-'+node.id"
+			[ngClass]="{'node-expanded' : node.isExpanded && node.children.length > 0, 'node-blox': node.allowChildren, 'node-item':!node.allowChildren}">
+
+			<div class="node">
+				<div class="node-title">
+					<span (click)="toggleNode(node)">{{node.children.length ?
+            (node.isExpanded?'-&nbsp;':'+'):''}}</span>
+					{{node.text}}
+					<span class="item-notes"> ({{node.children.length}}{{node.children.length?', expanded: ' +
+            !!node.isExpanded:''}})</span>
+
+				</div>
+				<div *ngIf="node.isExpanded && node.children.length" class="node-children" cdkDropList
+					cdkDropListOrientation="horizontal" [cdkDropListData]="node.children" [id]="node.id"
+					[cdkDropListConnectedTo]="dropTargetIds" class="droplist-container"
+					(cdkDropListDropped)="drop($event)" [cdkDropListSortingDisabled]="true">
+
+					<div *ngFor="let child of node.children" cdkDrag [cdkDragData]="child.id"
+						(cdkDragMoved)="dragMoved($event)" (cdkDragStarted)="startDragging($event)" class="box"
+						[ngClass]="{'node-selected':child.isSelected}" [dtsSelectItem]="child">
+						<div cdkDragHandle>
+							<ng-container *ngTemplateOutlet="tmplHandle"></ng-container>
+						</div>
+						<ng-container *ngTemplateOutlet="tmplNode,context:{node:child}"></ng-container>
+						<ng-template [cdkDragPlaceholder]></ng-template>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</ng-template>
+
+	<div cdkDropList [cdkDropListData]="nodes" [id]="'main'" [cdkDropListConnectedTo]="dropTargetIds"
+		cdkDropListOrientation="horizontal" class="droplist-container" (cdkDropListDropped)="drop($event)"
+		[cdkDropListSortingDisabled]="true">
+
+		<div *ngFor="let node of nodes" cdkDrag [cdkDragData]="node.id" (cdkDragMoved)="dragMoved($event)"
+			(cdkDragStarted)="startDragging($event)" class="box" [dtsSelectItem]="node"
+			[ngClass]="{'node-selected':node.isSelected}">
+			<div cdkDragHandle>
+				<ng-container *ngTemplateOutlet="tmplHandle"></ng-container>
+			</div>
+			<ng-container *ngTemplateOutlet="tmplNode,context:{node:node}"></ng-container>
+			<ng-template [cdkDragPlaceholder]></ng-template>
+		</div>
+	</div>
+
+
+</dts-select-container>
+
+
+<hr />
+<p><strong>current drag drop action:</strong></p>
+<pre>{{dropActionTodo|json}}</pre>
+
+<p><strong>Currently Selected Nodesy:</strong></p>
+<pre>{{selectedTreeNodes|json}}</pre>
+<hr />
+<p><strong>tree data</strong></p>
+<pre>{{nodes|json}}</pre>
