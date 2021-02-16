@@ -15,7 +15,9 @@
         }
     }
     &.highlighted {
-        border: 2px gray solid;
+        > .node {
+            border: 2px gray solid;
+        }
     }
     &.expanded {
         > .node {
